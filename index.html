@@ -5,6 +5,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Maximum UWU Converter ♡</title>
+
 <style>
 body {
   background: #ffe6f2;
@@ -13,6 +14,7 @@ body {
   text-align: center;
   padding: 20px;
 }
+
 textarea {
   width: 90%;
   height: 130px;
@@ -20,7 +22,9 @@ textarea {
   border-radius: 15px;
   padding: 12px;
   font-size: 16px;
+  box-sizing: border-box;
 }
+
 button {
   background: #ed91bc;
   color: white;
@@ -29,7 +33,9 @@ button {
   padding: 13px;
   margin: 8px;
   font-size: 16px;
+  cursor: pointer;
 }
+
 #result {
   background: white;
   border-radius: 15px;
@@ -39,12 +45,15 @@ button {
 }
 </style>
 </head>
+
 <body>
+
 <h1>♡ Maximum UWU ♡</h1>
 <p>Prepare to lose your ability to speak normally. :3</p>
 
 <textarea id="input" placeholder="Type something here..."></textarea>
 <br>
+
 <button onclick="convert()">UWU-IFY ME!!</button>
 <button onclick="copyText()">COPY ♡</button>
 
@@ -56,43 +65,73 @@ function convert() {
   let text = document.getElementById("input").value;
 
   const words = {
-    "hello":"hewwo",
-    "love":"wuv",
-    "sorry":"sowwy",
-    "please":"pwease",
-    "friend":"fwiend",
-    "really":"weawwy",
-    "you":"yuw",
-    "the":"da",
-    "very":"vewy",
-    "small":"smol"
+    hello: "hewwo",
+    love: "wuv",
+    sorry: "sowwy",
+    please: "pwease",
+    friend: "fwiend",
+    really: "weawwy",
+    you: "yuw",
+    the: "da",
+    very: "vewy",
+    small: "smol",
+    cute: "kyoot",
+    good: "gwood",
+    what: "what",
+    little: "widdle",
+    baby: "babi",
+    happy: "happi",
+    no: "nyo",
+    yes: "yesh",
+    thank: "fank",
+    thanks: "fanks"
   };
 
-  text = text.replace(/\b(hello|love|sorry|please|friend|really|you|the|very|small)\b/gi,
+  text = text.replace(
+    /\b(hello|love|sorry|please|friend|really|you|the|very|small|cute|good|what|little|baby|happy|no|yes|thank|thanks)\b/gi,
     word => {
-  let replacement = words[word.toLowerCase()];
-  if (word === word.toUpperCase()) return replacement.toUpperCase();
-  if (word[0] === word[0].toUpperCase())
-    return replacement[0].toUpperCase() + replacement.slice(1);
-  return replacement;
-});
+      let replacement = words[word.toLowerCase()];
 
+      if (word === word.toUpperCase()) {
+        return replacement.toUpperCase();
+      }
+
+      if (word[0] === word[0].toUpperCase()) {
+        return replacement[0].toUpperCase() + replacement.slice(1);
+      }
+
+      return replacement;
+    }
+  );
+
+  // Preserve uppercase and lowercase when changing R and L
   text = text.replace(/[rl]/gi, letter =>
-  letter === letter.toUpperCase() ? "W" : "w"
-);
+    letter === letter.toUpperCase() ? "W" : "w"
+  );
 
+  // Extra UWU chaos
   text = text.replace(/([.!?])/g, "$1 owo ♡");
 
-  if (text.trim()) text += " ~ uwu";
+  if (text.trim()) {
+    text += " ~ uwu";
+  }
 
   document.getElementById("result").textContent = text;
 }
 
 function copyText() {
   const text = document.getElementById("result").textContent;
-  navigator.clipboard.writeText(text);
-  alert("COPIED!! ♡");
+
+  if (!text) {
+    alert("Type something first!! ♡");
+    return;
+  }
+
+  navigator.clipboard.writeText(text)
+    .then(() => alert("COPIED!! ♡"))
+    .catch(() => alert("Copy wasn't available. Try selecting the result!"));
 }
 </script>
+
 </body>
 </html>
