@@ -70,13 +70,16 @@ function convert() {
 
   text = text.replace(/\b(hello|love|sorry|please|friend|really|you|the|very|small)\b/gi,
     word => {
-      let replacement = words[word.toLowerCase()];
-      return word[0] === word[0].toUpperCase()
-        ? replacement[0].toUpperCase() + replacement.slice(1)
-        : replacement;
-    });
+  let replacement = words[word.toLowerCase()];
+  if (word === word.toUpperCase()) return replacement.toUpperCase();
+  if (word[0] === word[0].toUpperCase())
+    return replacement[0].toUpperCase() + replacement.slice(1);
+  return replacement;
+});
 
-  text = text.replace(/r/gi, "w").replace(/l/gi, "w");
+  text = text.replace(/[rl]/gi, letter =>
+  letter === letter.toUpperCase() ? "W" : "w"
+);
 
   text = text.replace(/([.!?])/g, "$1 owo ♡");
 
