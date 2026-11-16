@@ -1,0 +1,95 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Maximum UWU Converter ♡</title>
+<style>
+body {
+  background: #ffe6f2;
+  color: #743b59;
+  font-family: Arial, sans-serif;
+  text-align: center;
+  padding: 20px;
+}
+textarea {
+  width: 90%;
+  height: 130px;
+  border: 2px solid pink;
+  border-radius: 15px;
+  padding: 12px;
+  font-size: 16px;
+}
+button {
+  background: #ed91bc;
+  color: white;
+  border: none;
+  border-radius: 12px;
+  padding: 13px;
+  margin: 8px;
+  font-size: 16px;
+}
+#result {
+  background: white;
+  border-radius: 15px;
+  padding: 15px;
+  min-height: 60px;
+  overflow-wrap: anywhere;
+}
+</style>
+</head>
+<body>
+<h1>♡ Maximum UWU ♡</h1>
+<p>Prepare to lose your ability to speak normally. :3</p>
+
+<textarea id="input" placeholder="Type something here..."></textarea>
+<br>
+<button onclick="convert()">UWU-IFY ME!!</button>
+<button onclick="copyText()">COPY ♡</button>
+
+<h2>Your cursed text:</h2>
+<div id="result"></div>
+
+<script>
+function convert() {
+  let text = document.getElementById("input").value;
+
+  const words = {
+    "hello":"hewwo",
+    "love":"wuv",
+    "sorry":"sowwy",
+    "please":"pwease",
+    "friend":"fwiend",
+    "really":"weawwy",
+    "you":"yuw",
+    "the":"da",
+    "very":"vewy",
+    "small":"smol"
+  };
+
+  text = text.replace(/\b(hello|love|sorry|please|friend|really|you|the|very|small)\b/gi,
+    word => {
+      let replacement = words[word.toLowerCase()];
+      return word[0] === word[0].toUpperCase()
+        ? replacement[0].toUpperCase() + replacement.slice(1)
+        : replacement;
+    });
+
+  text = text.replace(/r/gi, "w").replace(/l/gi, "w");
+
+  text = text.replace(/([.!?])/g, "$1 owo ♡");
+
+  if (text.trim()) text += " ~ uwu";
+
+  document.getElementById("result").textContent = text;
+}
+
+function copyText() {
+  const text = document.getElementById("result").textContent;
+  navigator.clipboard.writeText(text);
+  alert("COPIED!! ♡");
+}
+</script>
+</body>
+</html>
